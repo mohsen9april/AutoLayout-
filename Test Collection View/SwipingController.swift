@@ -11,6 +11,28 @@ import UIKit
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        coordinator.animate(alongsideTransition: { (_) in
+            self.collectionViewLayout.invalidateLayout()
+            
+            if self.pageControl.currentPage == 0 {
+                self.collectionView.contentOffset = CGPoint(x: 0, y: 0)
+            } else if self.pageControl.currentPage > 3 {
+                self.collectionView.contentOffset = CGPoint(x: 3, y: 3)
+            } else {
+                let indexPath = IndexPath(item: self.pageControl.currentPage, section: 0)
+                self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
+            
+        }) { (_) in
+            
+        }
+    }
+    
+    
+    
+    
     let pages = [Page(imageName: "cat", headerText: "join us today in our fun and games!", bodyText:"\nbodyText1"),
                  Page(imageName: "wall-e1", headerText: "showing WallE 1 !", bodyText: "\nbodyText2"),
                  Page(imageName: "wall-e2", headerText: "showing WallE 2 !",bodyText: "\nbodytext3"),
