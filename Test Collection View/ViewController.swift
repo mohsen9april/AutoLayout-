@@ -36,12 +36,79 @@ class ViewController: UIViewController {
         return textView
         
     }()
+    
+    
+    // Mske sure about encapsulation
+   private let perviousButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("PREV", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("NEXT ", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        let pinkColor = UIColor(displayP3Red: 232/255, green: 68/255, blue: 133/255, alpha: 1)
+        button.setTitleColor(pinkColor, for: .normal)
+        return button
+    }()
+    
+    private let pageControl : UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = UIColor(displayP3Red: 232/255, green: 68/255, blue: 133/255, alpha: 1)
+        pc.pageIndicatorTintColor = .gray
+        return pc
+        
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //      view.addSubview(bearImageView)
         view.addSubview(descriptionTextView)
+        setupButtonControl()
         setupLayout()
+        
+    }
+    
+    
+
+    private func setupButtonControl() {
+         //view.addSubview(perviousButton)
+//        perviousButton.backgroundColor = .red
+
+        
+//
+//        let yellowView = UIView()
+//        yellowView.backgroundColor = .yellow
+        
+//        let greenView = UIView()
+//        greenView.backgroundColor = .green
+        
+//        let blueView = UIView()
+//        blueView.backgroundColor = .blue
+//
+        
+        let bottomControlStackView = UIStackView(arrangedSubviews: [perviousButton,pageControl,nextButton])
+        view.addSubview(bottomControlStackView)
+  
+        bottomControlStackView.distribution = .fillEqually
+        //bottomControlStackView.axis = .vertical
+        
+        
+//        perviousButton.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+        bottomControlStackView.translatesAutoresizingMaskIntoConstraints = false
+        //perviousButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        bottomControlStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        bottomControlStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        bottomControlStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        bottomControlStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     private func setupLayout(){
@@ -66,7 +133,7 @@ class ViewController: UIViewController {
         bearImageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor, constant: 0).isActive = true
         bearImageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor, constant: 0).isActive = true
         //bearImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        bearImageView.heightAnchor.constraint(equalTo: topImageContainerView.heightAnchor, multiplier: 0.8).isActive = true
+        bearImageView.heightAnchor.constraint(equalTo: topImageContainerView.heightAnchor, multiplier: 0.6).isActive = true
         
         //Customize image and position in UI
 //        bearImageView.translatesAutoresizingMaskIntoConstraints = false
